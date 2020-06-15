@@ -1,0 +1,29 @@
+<h1 id="demo"></h1>
+<div id="map" style="width:500px;height:400px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9bb881730d685b3e3443b80b20f8ae2a"></script>
+
+<script>
+    var x = document.getElementById("demo");
+    getLocation();
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    
+    function showPosition(position) {
+      x.innerHTML = "Latitude: " + position.coords.latitude +
+      "<br>Longitude: " + position.coords.longitude;
+      
+      var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(position.coords.latitude, position.coords.longitude),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+    }
+    </script>
